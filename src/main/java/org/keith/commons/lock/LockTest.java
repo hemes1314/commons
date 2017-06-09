@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * »¥³âËø
  */
-public class Lock {
+public class LockTest {
 	
     private static java.util.concurrent.locks.Lock lock = new ReentrantLock();  
     

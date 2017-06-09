@@ -3,18 +3,13 @@ package org.keith.commons.lock;
 import java.util.concurrent.ConcurrentHashMap;
 
 // 非分布式全局锁
-public class GlobalLock {
+public class GlobalLockTest {
 	
 	private ConcurrentHashMap<Object, Object> map = new ConcurrentHashMap<Object, Object>();
 
-	/**
-	 * 日志记录
-	 */
-//	private static Logger logger = LoggerFactory.getLogger(GlobalLock.class);
+	private static transient GlobalLockTest lock = null;
 	
-	private static transient GlobalLock lock = null;
-	
-	private GlobalLock(){}
+	private GlobalLockTest(){}
 	
 	public void lock(Object o) {		
 		while(!tryLock(o)) {
@@ -24,11 +19,9 @@ public class GlobalLock {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 //				logger.error("OrderLock error: {}", e);
-				
 			}
 		}
 	}
-
 	
 	public boolean tryLock(Object o) {
 		if (!map.contains(o)) {
@@ -46,20 +39,19 @@ public class GlobalLock {
 		map.remove(o);
 	}
 	
-	public static GlobalLock getLock () {
+	public static GlobalLockTest getLock () {
 		if (lock == null) {
-			synchronized(GlobalLock.class) {
+			synchronized(GlobalLockTest.class) {
 				if (lock == null) {
-					lock = new GlobalLock();
+					lock = new GlobalLockTest();
 				}
 			}
-			
 		}
 		return lock;
 	} 
 	
 	public static void main(String[] args) {
-		GlobalLock globalLock = new GlobalLock();
+		GlobalLockTest globalLock = new GlobalLockTest();
 		globalLock.lock("businessName");
 		// do something
 		globalLock.unlock("businessName");
