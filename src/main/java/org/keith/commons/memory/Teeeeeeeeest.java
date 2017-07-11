@@ -1,10 +1,13 @@
 package org.keith.commons.memory;
 
+import com.javamex.classmexer.MemoryUtil;
+
 public class Teeeeeeeeest {
 
 	public static void main(String[] args) throws IllegalAccessException {  
-        ObjectInfo res = new ClassIntrospector().introspect( new ObjectA() );  
-        System.out.println( res.getDeepSize() );  
+//        ObjectInfo res = new ClassIntrospector().introspect( new ObjectA() );  
+//        System.out.println( res.getDeepSize() );  
+		System.out.println(MemoryUtil.memoryUsageOf(new Object()));
     }  
    
     private static class ObjectA {  
