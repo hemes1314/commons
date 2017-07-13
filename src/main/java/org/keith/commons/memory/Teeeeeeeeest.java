@@ -2,12 +2,22 @@ package org.keith.commons.memory;
 
 import com.javamex.classmexer.MemoryUtil;
 
+/**
+TomcatµÄVM arguments:
+-Dcatalina.base="D:\software\apache-tomcat-8.0.24" 
+-Dcatalina.home="D:\software\apache-tomcat-8.0.24" -Dwtp.deploy="D:\software\apache-tomcat-8.0.24\webapps" 
+-Djava.endorsed.dirs="D:\software\apache-tomcat-8.0.24\endorsed"
+-noverify -javaagent:D:\classmexer.jar
+
+DebugµÄVM arguments:
+-javaagent:D:\classmexer.jar
+ */
 public class Teeeeeeeeest {
 
 	public static void main(String[] args) throws IllegalAccessException {  
 //        ObjectInfo res = new ClassIntrospector().introspect( new ObjectA() );  
 //        System.out.println( res.getDeepSize() );  
-		System.out.println(MemoryUtil.memoryUsageOf(new Object()));
+		System.out.println(MemoryUtil.deepMemoryUsageOf(new Object()));
     }  
    
     private static class ObjectA {  
