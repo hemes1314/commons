@@ -17,5 +17,11 @@
 		 <artifactId>spring-orm</artifactId>
 		 <version>4.1.6.RELEASE</version>
 	  </dependency>
+	  
+	  <dependency>
+		  <groupId>org.apache.zookeeper</groupId>
+		  <artifactId>zookeeper</artifactId>
+		  <version>3.4.6</version>
+	  </dependency>
   </dependencies>
 </project>
