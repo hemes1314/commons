@@ -429,7 +429,6 @@ public final class ObjectId implements Comparable<ObjectId>, Serializable {
         return result;
     }
 
-    @Override
     public int compareTo(final ObjectId other) {
         if (other == null) {
             throw new NullPointerException();
