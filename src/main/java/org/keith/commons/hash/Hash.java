@@ -1,14 +1,10 @@
 package org.keith.commons.hash;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
 public class Hash {
 
 	/**
 	 * java获取hash值
-	 * 
+	 * 这个方法的主要作用是防止质量较差的哈希函数带来过多的冲突（碰撞）问题。Java中int值占4个字节，即32位。根据这32位值进行移位、异或运算得到一个值。
 	 * 
 	 * @param h
 	 * @return
@@ -20,7 +16,7 @@ public class Hash {
 	
 	/**
 	 * java hash算法
-	 * 
+	 * indexFor返回hash值和table数组长度减1的与运算结果。为什么使用的是length-1？应为这样可以保证结果的最大值是length-1，不会产生数组越界问题。
 	 * 
 	 * @param h
 	 * @param length
@@ -32,7 +28,7 @@ public class Hash {
 	
 	/**
 	 * 普通hash算法
-	 * 
+	 * 由于使用了除法所以性能比较低
 	 * 
 	 * @param h
 	 * @param length
