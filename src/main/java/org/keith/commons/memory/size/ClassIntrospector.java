@@ -1,4 +1,4 @@
-package org.keith.commons.memory;  
+package org.keith.commons.memory.size;  
   
 import java.lang.reflect.Array;  
 import java.lang.reflect.Field;  

@@ -24,7 +24,8 @@ public class LockTest {
 	    		
 	    	try {  
 	            // access the resource protected by this lock  
-	        } finally {  
+	        } finally { 
+	        	// 必须在finally中释放
 	            // 释放锁  
 	        	// 如果线程并不持有锁, 却执行该方法, 可能导致异常的发生
 	            lock.unlock();  

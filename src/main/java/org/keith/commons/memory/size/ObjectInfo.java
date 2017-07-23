@@ -1,4 +1,4 @@
-package org.keith.commons.memory;
+package org.keith.commons.memory.size;
 
 import java.util.ArrayList;
 import java.util.Collections;

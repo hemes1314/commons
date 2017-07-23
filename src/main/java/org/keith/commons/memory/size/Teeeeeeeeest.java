@@ -1,15 +1,15 @@
-package org.keith.commons.memory;
+package org.keith.commons.memory.size;
 
 import com.javamex.classmexer.MemoryUtil;
 
 /**
-TomcatµÄVM arguments:
+Tomcatï¿½ï¿½VM arguments:
 -Dcatalina.base="D:\software\apache-tomcat-8.0.24" 
 -Dcatalina.home="D:\software\apache-tomcat-8.0.24" -Dwtp.deploy="D:\software\apache-tomcat-8.0.24\webapps" 
 -Djava.endorsed.dirs="D:\software\apache-tomcat-8.0.24\endorsed"
 -noverify -javaagent:D:\classmexer.jar
 
-DebugµÄVM arguments:
+Debugï¿½ï¿½VM arguments:
 -javaagent:D:\classmexer.jar
  */
 public class Teeeeeeeeest {
