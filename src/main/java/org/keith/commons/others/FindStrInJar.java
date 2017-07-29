@@ -1,6 +1,7 @@
 package org.keith.commons.others;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -86,6 +87,22 @@ public class FindStrInJar {
 							// this.jarFiles.add(filename + " ---> " + thisClassName);
 							// }
 						}
+					} else if(filename.endsWith(".sql") || filename.endsWith(".txt")) {
+						
+						String encoding="UTF-8";
+		                File file=new File(filename);
+		                if(file.isFile() && file.exists()){ //判断文件是否存在
+		                    InputStreamReader read = new InputStreamReader(new FileInputStream(file),encoding);//考虑到编码格式
+		                    BufferedReader bufferedReader = new BufferedReader(read);
+		                    String lineTxt = null;
+		                    while((lineTxt = bufferedReader.readLine()) != null){
+		                        if(lineTxt.indexOf(condition) > -1) {
+		                        	System.out.println(lineTxt);
+		                        	System.out.println(filename);
+		                        }
+		                    }
+		                    read.close();
+		                }
 					}
 				}
 			}
@@ -95,8 +112,8 @@ public class FindStrInJar {
 	}
 
 	public static void main(String args[]) {
-		FindStrInJar findInJar = new FindStrInJar("Diamond"); // 要寻找的字符串
-		List<String> jarFiles = findInJar.find("C:/.m2/repository", true);
+		FindStrInJar findInJar = new FindStrInJar("bin_category"); // 要寻找的字符串
+		List<String> jarFiles = findInJar.find("D:/git/DB", true);
 		if (jarFiles.size() == 0) {
 			System.out.println("Not Found");
 		} else {
