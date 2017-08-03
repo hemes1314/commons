@@ -1,4 +1,4 @@
-package org.keith.commons.others;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -112,7 +112,7 @@ public class FindStrInJar {
 	}
 
 	public static void main(String args[]) {
-		FindStrInJar findInJar = new FindStrInJar("sync_date"); // 要寻找的字符串
+		FindStrInJar findInJar = new FindStrInJar(args[0]); // 要寻找的字符串
 		List<String> jarFiles = findInJar.find("D:/git/DB", true);
 		if (jarFiles.size() == 0) {
 			System.out.println("Not Found");
