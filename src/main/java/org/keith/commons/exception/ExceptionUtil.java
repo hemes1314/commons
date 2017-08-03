@@ -17,8 +17,6 @@ public final class ExceptionUtil {
 	public static String getStackTrace(Throwable thr) {
 		StringWriter sw = new StringWriter();
 
-		PrintWriter pw1 = new PrintWriter(sw);
-				
 		// Java 7 ÐÂµÄ try-with-resources Óï¾ä
 		try (PrintWriter pw = new PrintWriter(sw)) {
 			thr.printStackTrace(pw);
