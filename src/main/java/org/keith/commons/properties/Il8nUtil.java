@@ -43,7 +43,7 @@ public class Il8nUtil {
 	/**
 	 * 获取资源文件值
 	 * @param key 资源文件key
-	 * @param Locale 地区代码
+	 * @param locale 地区代码
 	 * @param args 参数列表
 	 * @return value
 	 */
