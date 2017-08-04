@@ -36,8 +36,7 @@ public class Il8nUtil {
 	 */
 	public static String getMessage(String key, String... args) {
 		
-		// 用相同key只获取最后一个key的值
-		return getMessageResourceInstance().getMessage(key, args, null);    
+		return getMessage(key, null, args);
 	}
 	
 	/**
