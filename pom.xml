@@ -35,16 +35,16 @@
 			<artifactId>vertx-core</artifactId>
 			<version>3.3.2</version>
 	 	 </dependency>
-	  	<dependency>
+	  	 <dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-web</artifactId>
 			<version>3.3.2</version>
-	  	</dependency>
-		
-	  	<dependency>
-		  <groupId>org.apache.zookeeper</groupId>
-		  <artifactId>zookeeper</artifactId>
-		  <version>3.4.6</version>
-	  	</dependency>
+	  	 </dependency>
+		 
+	  	 <dependency>
+		  	<groupId>org.apache.zookeeper</groupId>
+		  	<artifactId>zookeeper</artifactId>
+		  	<version>3.4.6</version>
+	  	 </dependency>
   </dependencies>
 </project>
