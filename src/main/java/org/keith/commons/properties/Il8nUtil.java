@@ -14,7 +14,7 @@ public class Il8nUtil {
 	}
 	
 	/**
-	 * »ñÈ¡×ÊÔ´°ó¶¨ÊµÀı
+	 * è·å–èµ„æºç»‘å®šå®ä¾‹
 	 * @return ReloadableResourceBundleMessageSource
 	 */
 	private static ReloadableResourceBundleMessageSource getMessageResourceInstance() {
@@ -22,16 +22,16 @@ public class Il8nUtil {
 			messageResource = new ReloadableResourceBundleMessageSource();
 			messageResource.setBasename(Constants.path);
 			messageResource.setDefaultEncoding("UTF-8");
-			// Ë¢ĞÂÊ±¼ä£¬Ä¬ÈÏ-1£¬ÓÀ²»Ë¢ĞÂ
+			// åˆ·æ–°æ—¶é—´ï¼Œé»˜è®¤-1ï¼Œæ°¸ä¸åˆ·æ–°
 //			messageSource.setCacheSeconds(5);
 		}
 		return messageResource;
 	}
 	
 	/**
-	 * »ñÈ¡×ÊÔ´ÎÄ¼şÖµ
-	 * @param key ×ÊÔ´ÎÄ¼şkey
-	 * @param args ²ÎÊıÁĞ±í
+	 * è·å–èµ„æºæ–‡ä»¶å€¼
+	 * @param key èµ„æºæ–‡ä»¶key
+	 * @param args å‚æ•°åˆ—è¡¨
 	 * @return value
 	 */
 	public static String getMessage(String key, String... args) {
@@ -40,15 +40,15 @@ public class Il8nUtil {
 	}
 	
 	/**
-	 * »ñÈ¡×ÊÔ´ÎÄ¼şÖµ
-	 * @param key ×ÊÔ´ÎÄ¼şkey
-	 * @param locale µØÇø´úÂë
-	 * @param args ²ÎÊıÁĞ±í
+	 * è·å–èµ„æºæ–‡ä»¶å€¼
+	 * @param key èµ„æºæ–‡ä»¶key
+	 * @param locale åœ°åŒºä»£ç 
+	 * @param args å‚æ•°åˆ—è¡¨
 	 * @return value
 	 */
 	public static String getMessage(String key, Locale locale, String... args) {
 		
-		// ÏàÍ¬keyÖ»»ñÈ¡×îºóÒ»¸ökeyµÄÖµ
+		// ç›¸åŒkeyåªè·å–æœ€åä¸€ä¸ªkeyçš„å€¼
 		return getMessageResourceInstance().getMessage(key, args, locale);
 	}
 	
