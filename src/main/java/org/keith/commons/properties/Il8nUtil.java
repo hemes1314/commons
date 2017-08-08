@@ -29,6 +29,17 @@ public class Il8nUtil {
 	/**
 	 * 获取资源文件值
 	 * @param key 资源文件key
+	 * @return value
+	 */
+	public static String getMessage(String key) {
+		
+		Object[] args = {};
+		return getMessage(key, null, args);
+	}
+	
+	/**
+	 * 获取资源文件值
+	 * @param key 资源文件key
 	 * @param args 参数列表
 	 * @return value
 	 */
