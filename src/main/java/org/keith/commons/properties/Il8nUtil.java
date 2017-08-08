@@ -1,7 +1,5 @@
 package org.keith.commons.properties;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -34,7 +32,7 @@ public class Il8nUtil {
 	 * @param args 参数列表
 	 * @return value
 	 */
-	public static String getMessage(String key, String... args) {
+	public static String getMessage(String key, Object... args) {
 		
 		return getMessage(key, null, args);
 	}
@@ -46,9 +44,11 @@ public class Il8nUtil {
 	 * @param args 参数列表
 	 * @return value
 	 */
-	public static String getMessage(String key, Locale locale, String... args) {
+	public static String getMessage(String key, Locale locale, Object... args) {
 		
 		// 相同key只获取最后一个key的值
+		for(int i = 0; i < args.length; i++) 
+			args[i] = String.valueOf(args[i]);
 		return getMessageResourceInstance().getMessage(key, args, locale);
 	}
 	
@@ -56,7 +56,7 @@ public class Il8nUtil {
 		String value = Il8nUtil.getMessage("A");
 		String value1 = Il8nUtil.getMessage("A", Locale.JAPANESE);
 		String value2 = Il8nUtil.getMessage("B");
-		String value3 = Il8nUtil.getMessage("C", "John", DateFormat.getInstance().format(new Date()));
+		String value3 = Il8nUtil.getMessage("C", "John", 123456);
 		System.out.println(value);
 		System.out.println(value1);
 		System.out.println(value2);
