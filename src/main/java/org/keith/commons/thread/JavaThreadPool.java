@@ -29,12 +29,12 @@ public class JavaThreadPool {
 		pool.execute(t4);
 		pool.execute(t5);
 		
-//		pool.scheduleAtFixedRate(new MyThread2(), 0, 10000, TimeUnit.MILLISECONDS);
+//		pool.scheduleAtFixedRate(new MyThread2(), 10000, 100, TimeUnit.MILLISECONDS);
 		// scheduleAtFixedRate(TimerTask task, long delay, long period)
 		// task--这是被调度的任务。delay--上一个个任务开始执行之后延迟 多少秒之后再执行
 		// period--这是在连续执行任务之间的毫秒的时间。
 
-		pool.scheduleWithFixedDelay(new MyThread2(), 200, 10000, TimeUnit.MILLISECONDS);
+		pool.scheduleWithFixedDelay(new MyThread2(), 10000, 1000, TimeUnit.MILLISECONDS);
 		// 上一个个任务结束执行之后延迟 ，多少秒之后再执行， 是从上一个任务结束时开始计算
 		
 		// 关闭线程池
