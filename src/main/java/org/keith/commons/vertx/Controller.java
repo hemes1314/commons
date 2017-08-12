@@ -21,11 +21,11 @@ public class Controller {
 		return instance;
 	}
 	
-	private EventBus eb;// 事件总线
+	private EventBus eb;// 浜嬩欢鎬荤嚎
 	
 	public boolean init(Vertx vertx) {
 		this.eb = vertx.eventBus();
-		//启动拣货工作反馈单元
+		//鍚姩鎷ｈ揣宸ヤ綔鍙嶉鍗曞厓
 //		vertx.deployVerticle();
 //		vertx.deployVerticle();
 		return true;

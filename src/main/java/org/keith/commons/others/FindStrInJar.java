@@ -112,8 +112,8 @@ public class FindStrInJar {
 	}
 
 	public static void main(String args[]) {
-		FindStrInJar findInJar = new FindStrInJar("sync_date"); // 要寻找的字符串
-		List<String> jarFiles = findInJar.find("D:/git/DB", true);
+		FindStrInJar findInJar = new FindStrInJar("picker"); // 要寻找的字符串
+		List<String> jarFiles = findInJar.find("D:/geek+/DB/", true);
 		if (jarFiles.size() == 0) {
 			System.out.println("Not Found");
 		} else {

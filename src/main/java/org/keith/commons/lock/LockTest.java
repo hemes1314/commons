@@ -3,7 +3,7 @@ package org.keith.commons.lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * »¥³âËø
+ * äº’æ–¥é”
  */
 public class LockTest {
 	
@@ -16,18 +16,18 @@ public class LockTest {
         invokeMethod2();
     }  
   
-    // ÏÔÊ½ÊÍ·ÅËø
+    // æ˜¾å¼é‡Šæ”¾é”
     private static void invokeMethod() {  
     	
-    	// lock.lock(); // Ëø²»¿ÉÓÃÔò»áµÈ´ı
-    	if(lock.tryLock()) { // Èç¹ûËø²»¿ÉÓÃ, ²»»áµ¼ÖÂµ±Ç°Ïß³Ì±»½ûÓÃ, µ±Ç°Ïß³ÌÈÔÈ»¼ÌĞøÍùÏÂÖ´ĞĞ´úÂë.
+    	// lock.lock(); // é”ä¸å¯ç”¨åˆ™ä¼šç­‰å¾…
+    	if(lock.tryLock()) { // å¦‚æœé”ä¸å¯ç”¨, ä¸ä¼šå¯¼è‡´å½“å‰çº¿ç¨‹è¢«ç¦ç”¨, å½“å‰çº¿ç¨‹ä»ç„¶ç»§ç»­å¾€ä¸‹æ‰§è¡Œä»£ç .
 	    		
 	    	try {  
 	            // access the resource protected by this lock  
 	        } finally { 
-	        	// ±ØĞëÔÚfinallyÖĞÊÍ·Å
-	            // ÊÍ·ÅËø  
-	        	// Èç¹ûÏß³Ì²¢²»³ÖÓĞËø, È´Ö´ĞĞ¸Ã·½·¨, ¿ÉÄÜµ¼ÖÂÒì³£µÄ·¢Éú
+	        	// å¿…é¡»åœ¨finallyä¸­é‡Šæ”¾
+	            // é‡Šæ”¾é”  
+	        	// å¦‚æœçº¿ç¨‹å¹¶ä¸æŒæœ‰é”, å´æ‰§è¡Œè¯¥æ–¹æ³•, å¯èƒ½å¯¼è‡´å¼‚å¸¸çš„å‘ç”Ÿ
 	            lock.unlock();  
 	        }  
     	} else {
@@ -35,7 +35,7 @@ public class LockTest {
     	}
     }  
     
-    // ÒşÊ½ÊÍ·ÅËø
+    // éšå¼é‡Šæ”¾é”
     private static void invokeMethod2() {
     	synchronized(PICK_RF_LOCK) {
     		// access the resource protected by this lock  

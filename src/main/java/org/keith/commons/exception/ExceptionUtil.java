@@ -8,16 +8,16 @@ public final class ExceptionUtil {
 	}
 
 	/**
-	 * Êä³öÒì³£¶ÑÕ»
+	 * è¾“å‡ºå¼‚å¸¸å †æ ˆ
 	 * 
-	 * @author Áõ¿¡ 2016Äê7ÔÂ19ÈÕ
+	 * @author åˆ˜ä¿Š 2016å¹´7æœˆ19æ—¥
 	 * @param thr
 	 * @return
 	 */
 	public static String getStackTrace(Throwable thr) {
 		StringWriter sw = new StringWriter();
 
-		// Java 7 ĞÂµÄ try-with-resources Óï¾ä
+		// Java 7 æ–°çš„ try-with-resources è¯­å¥
 		try (PrintWriter pw = new PrintWriter(sw)) {
 			thr.printStackTrace(pw);
 		}

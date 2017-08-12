@@ -4,11 +4,11 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * ��д��
- * ��ȡ�������ݵ�Ƶ��Զ�����޸Ĺ������ݵ�Ƶ��
- * 1��������߿���ͬʱ���ж�
- * 2��д�߱��뻥�⣨ֻ����һ��д��д��Ҳ���ܶ���д��ͬʱ���У�
- * 3��д�������ڶ��ߣ�һ����д�ߣ���������߱���ȴ�������ʱ���ȿ���д�ߣ�
+ * 读写锁
+ * 读取共享数据的频率远大于修改共享数据的频率
+ * 1）多个读者可以同时进行读
+ * 2）写者必须互斥（只允许一个写者写，也不能读者写者同时进行）
+ * 3）写者优先于读者（一旦有写者，则后续读者必须等待，唤醒时优先考虑写者）
  */
 public class ReadWriteLockTest {
 	private static ReadWriteLock lock = new ReentrantReadWriteLock();  

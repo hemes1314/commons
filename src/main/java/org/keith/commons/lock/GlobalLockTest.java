@@ -2,7 +2,7 @@ package org.keith.commons.lock;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-// ·Ç·Ö²¼Ê½È«¾ÖËø
+// éåˆ†å¸ƒå¼å…¨å±€é”
 public class GlobalLockTest {
 	
 	private ConcurrentHashMap<Object, Object> map = new ConcurrentHashMap<Object, Object>();

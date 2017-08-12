@@ -6,7 +6,7 @@ import java.util.Locale;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 /**
- * ¶¨Ê±Ë¢ĞÂ×ÊÔ´ÎÄ¼ş£¬²»±ØÖØÆô
+ * å®šæ—¶åˆ·æ–°èµ„æºæ–‡ä»¶ï¼Œä¸å¿…é‡å¯
  */
 public class ReloadableResourceBundleMessageSourceTest {
 
@@ -14,12 +14,12 @@ public class ReloadableResourceBundleMessageSourceTest {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.setBasename(Constants.path);
 		messageSource.setDefaultEncoding("UTF-8");
-		// Ë¢ĞÂÊ±¼ä£¬Ä¬ÈÏ-1£¬ÓÀ²»Ë¢ĞÂ
+		// åˆ·æ–°æ—¶é—´ï¼Œé»˜è®¤-1ï¼Œæ°¸ä¸åˆ·æ–°
 //		messageSource.setCacheSeconds(5);
 		
 		Object[] params = {"John", new GregorianCalendar().getTime()};    
 		    
-		// ÓÃÏàÍ¬keyÖ»»ñÈ¡×îºóÒ»¸ökeyµÄÖµ
+		// ç”¨ç›¸åŒkeyåªè·å–æœ€åä¸€ä¸ªkeyçš„å€¼
 		for(int i = 0; i < 5; i++) {
 			String str1 = messageSource.getMessage("C",params, null);    
 			System.out.println(str1);    

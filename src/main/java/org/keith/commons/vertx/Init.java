@@ -10,7 +10,7 @@ public class Init {
 	
 	static {
 		VertxOptions options = new VertxOptions();
-		//×î´óÖ´ĞĞÊ±¼ä10S,³¬¹ı10s,½²´¥·¢¾¯¸æ
+		//æœ€å¤§æ‰§è¡Œæ—¶é—´10S,è¶…è¿‡10s,è®²è§¦å‘è­¦å‘Š
 		options.setMaxEventLoopExecuteTime(10000000000L);
 		vertx = Vertx.vertx(options);
 	}

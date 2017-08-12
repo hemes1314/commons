@@ -11,13 +11,13 @@ public class ZK1 {
 	public static void main(String[] args) throws Exception {
 		Watcher watcher = new Watcher() {
 			public void process(WatchedEvent event) {
-				System.out.println("¼àÌıµ½µÄÊÂ¼ş£º" + event);
+				System.out.println("ç›‘å¬åˆ°çš„äº‹ä»¶ï¼š" + event);
 			}
 		};
 		final ZooKeeper zookeeper = new ZooKeeper(connectString, sessionTimeout, watcher);
-		System.out.println("»ñµÃÁ¬½Ó£º" + zookeeper);
+		System.out.println("è·å¾—è¿æ¥ï¼š" + zookeeper);
 		final byte[] data = zookeeper.getData("/zk1", watcher, null);
-		System.out.println("¶ÁÈ¡µÄÖµ£º" + new String(data));
+		System.out.println("è¯»å–çš„å€¼ï¼š" + new String(data));
 		zookeeper.close();
 	}
 }

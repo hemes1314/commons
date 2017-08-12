@@ -14,7 +14,7 @@ public class ResourceBundleMessageSourceTest {
 		
 		Object[] params = {"John", new GregorianCalendar().getTime()};    
 		    
-		//②获取格式化的国际化信息    
+		//鈶¤幏鍙栨牸寮忓寲鐨勫浗闄呭寲淇℃伅    
 		String str1 = messageSource.getMessage("C",params, null);    
 		System.out.println(str1);    
 		

@@ -9,7 +9,7 @@ public class ResourceBundleTest {
 
 	public static void main(String[] args) {
 		
-		//①加载本地化资源    
+		//鈶犲姞杞芥湰鍦板寲璧勬簮    
 		ResourceBundle rb1 = ResourceBundle.getBundle(Constants.path);     
 		ResourceBundle rb2 = ResourceBundle.getBundle(Constants.path,Locale.JAPANESE);    
 		Object[] params = {"John", new GregorianCalendar().getTime()};    
