@@ -21,14 +21,16 @@ public class JavaThreadPool {
 		Thread t2 = new MyThread();
 		Thread t3 = new MyThread();
 		Thread t4 = new MyThread();
-		Thread t5 = new MyThread();
-		// 将线程放入池中进行执行
+		Thread t5 = new MyThread
+		// 将线程放入池中直接进行执行
 		pool.execute(t1);
 		pool.execute(t2);
 		pool.execute(t3);
 		pool.execute(t4);
 		pool.execute(t5);
-		
+		// pool.submit(t1); // 有返回值
+	    
+	    	// 线程控制执行
 //		pool.scheduleAtFixedRate(new MyThread2(), 10000, 100, TimeUnit.MILLISECONDS);
 		// scheduleAtFixedRate(TimerTask task, long delay, long period)
 		// task--这是被调度的任务。delay--上一个个任务开始执行之后延迟 多少秒之后再执行
