@@ -7,9 +7,9 @@ import java.util.concurrent.ExecutorService;
 
 public class JavaThreadPool {
     public static void main(String[] args) {
-    	
-//    	//创建一个使用单个 worker 线程的 Executor，以无界队列方式来运行该线程。 
-//    	ExecutorService pool = Executors.newSingleThreadExecutor(); 
+
+//    	//创建一个使用单个 worker 线程的 Executor，以无界队列方式来运行该线程。
+//    	ExecutorService pool = Executors.newSingleThreadExecutor();
 //    	// 可变尺寸的线程池 ，缓冲池容量大小为Integer.MAX_VALUE
 //    	ExecutorService pool = Executors.newCachedThreadPool();
 		// 创建一个可重用固定线程数的线程池
@@ -21,7 +21,7 @@ public class JavaThreadPool {
 		Thread t2 = new MyThread();
 		Thread t3 = new MyThread();
 		Thread t4 = new MyThread();
-		Thread t5 = new MyThread
+		Thread t5 = new MyThread();
 		// 将线程放入池中直接进行执行
 		pool.execute(t1);
 		pool.execute(t2);
@@ -29,7 +29,7 @@ public class JavaThreadPool {
 		pool.execute(t4);
 		pool.execute(t5);
 		// pool.submit(t1); // 有返回值
-	    
+
 	    	// 线程控制执行
 //		pool.scheduleAtFixedRate(new MyThread2(), 10000, 100, TimeUnit.MILLISECONDS);
 		// scheduleAtFixedRate(TimerTask task, long delay, long period)
@@ -38,7 +38,7 @@ public class JavaThreadPool {
 
 		pool.scheduleWithFixedDelay(new MyThread2(), 10000, 1000, TimeUnit.MILLISECONDS);
 		// 上一个个任务结束执行之后延迟 ，多少秒之后再执行， 是从上一个任务结束时开始计算
-		
+
 		// 关闭线程池
 //		pool.shutdown();
     }
