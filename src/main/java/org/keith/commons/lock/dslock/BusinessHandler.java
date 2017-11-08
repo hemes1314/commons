@@ -4,7 +4,7 @@ package org.keith.commons.lock.dslock;
  * @author wubin
  * @date 2017/11/07
  **/
-public class Business implements DistributedLockHandler {
+public class BusinessHandler implements DistributedLockHandler {
     @Override
     public void doSomeThing(DistributedLock distributedLock) {
         try{

@@ -19,19 +19,25 @@ public class DistributedLock implements Watcher {
     private String waitPath;
     public String LOG_PREFIX_OF_THREAD;
     private int SESSION_TIMEOUT = 10000;
-    private String GROUP_PATH = "/disLocks";
-    private String SUB_PATH = "/disLocks/sub";
+    private String GROUP_PATH = "/disLocks/group";
+    private String SUB_PATH = "/disLocks/group/sub";
     private final String CONNECTION_STRING = "127.0.0.1:2181";
 
     private DistributedLockHandler handler;
+
+    //确保所有线程运行结束；
+    private CountDownLatch threadSemaphore;
 
     //确保连接zk成功；
     private CountDownLatch connectedSemaphore = new CountDownLatch(1);
 
     public DistributedLock(String lockName) throws IOException, InterruptedException, KeeperException {
+
         this.threadId = Thread.currentThread().getId();
-        LOG_PREFIX_OF_THREAD = "【Thread"+threadId+"】";
-        SUB_PATH = GROUP_PATH + "/" + lockName;
+        this.LOG_PREFIX_OF_THREAD = "【Thread"+threadId+"】";
+
+        this.GROUP_PATH = "/disLocks/" + lockName;
+        this.SUB_PATH = "/disLocks/" + lockName + "/sub";
 
         // 建立连接
         createConnection(CONNECTION_STRING, SESSION_TIMEOUT);
@@ -130,6 +136,9 @@ public class DistributedLock implements Watcher {
                 try {
                     if(tryLock()){
                         excute();
+                        if(threadSemaphore != null) {
+                            threadSemaphore.countDown();
+                        }
                     }
                 } catch (KeeperException e) {
                     e.printStackTrace();
@@ -242,5 +251,13 @@ public class DistributedLock implements Watcher {
 
     public void setHandler(DistributedLockHandler handler) {
         this.handler = handler;
+    }
+
+    public CountDownLatch getThreadSemaphore() {
+        return threadSemaphore;
+    }
+
+    public void setThreadSemaphore(CountDownLatch threadSemaphore) {
+        this.threadSemaphore = threadSemaphore;
     }
 }

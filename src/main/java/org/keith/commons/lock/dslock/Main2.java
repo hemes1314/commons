@@ -1,16 +1,14 @@
 package org.keith.commons.lock.dslock;
 
-import org.apache.zookeeper.KeeperException;
+import org.keith.commons.vertx.Business;
 
-import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author wubin
  * @date 2017/11/07
  **/
-public class Main {
+public class Main2 {
 
     public static final int THREAD_NUM = 10;
 
@@ -24,9 +22,9 @@ public class Main {
                 @Override
                 public void run() {
                     try{
-                        DistributedLock dl = new DistributedLock("bs1");
-                        dl.setThreadSemaphore(threadSemaphore);
+                        DistributedLock dl = new DistributedLock("bs2");
                         dl.setHandler(new BusinessHandler());
+                        dl.setThreadSemaphore(threadSemaphore);
                         if(dl.tryLock()) {
                             dl.excute();
                             threadSemaphore.countDown();
