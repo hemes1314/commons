@@ -32,6 +32,7 @@ public class TestController {
 //        System.out.println("request uri:"+request.getRequestURI());
 //        System.out.println("request url:"+request.getRequestURL());
 //        System.out.println("request queryString:"+request.getQueryString());
+//        System.out.println("request locale:"+request.getLocale());
 //
 //        System.out.println("request parameters:");
 //        Enumeration<String> parameterNames = request.getParameterNames();
@@ -48,6 +49,14 @@ public class TestController {
 //            sb.append(new String(b,0,n));
 //        }
 //        System.out.println(sb.toString());
+//
+//        System.out.println("request headers:");
+//        Enumeration<String> headerNames = request.getHeaderNames();
+//        while(headerNames.hasMoreElements()) {
+//            String headerName = headerNames.nextElement();
+//            String headerValue = request.getHeader(headerName);
+//            System.out.println("headerKey:"+headerName+" -> "+headerValue);
+//        }
 //        return ResultMaker.success(Boolean.TRUE);
 //    }
 }
