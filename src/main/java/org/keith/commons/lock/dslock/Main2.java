@@ -1,7 +1,5 @@
 package org.keith.commons.lock.dslock;
 
-import org.keith.commons.vertx.Business;
-
 import java.util.concurrent.CountDownLatch;
 
 /**
