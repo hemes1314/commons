@@ -20,6 +20,7 @@ public class C01E03_HelloWorld {
         File file = new File(TARGET);
         file.mkdirs();
         new C01E03_HelloWorld().createPdf(BASEURI, SRC, DEST);
+        System.out.println("ok");
     }
 
     /**
