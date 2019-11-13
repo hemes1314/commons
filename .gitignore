@@ -1,0 +1,16 @@
+.idea/
+logs/
+doc/
+LOG_HOME_IS_UNDEFINED/
+target/
+project/target/
+project/project/
+.history
+*.log
+*.iml
+*.class
+.ensime
+.ensima_cache
+.projectile
+**/rebel.xml
+common-model-repository-sdk-java/
