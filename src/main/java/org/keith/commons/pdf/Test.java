@@ -9,11 +9,12 @@ import com.itextpdf.kernel.pdf.WriterProperties;
 import com.itextpdf.layout.font.FontProvider;
 
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Test {
-    public static final String BASEURI = "D:\\mnt\\aps\\tmp\\fileUpload\\file\\html";
+    public static final String BASEURI = "D:/mnt/aps/tmp/fileUpload/file/template/";
+    public static final String SRC = String.format("%sindex.tpl", BASEURI);
     public static final String TARGET = "target/results/ch01/";
     public static final String DEST = String.format("%stest.pdf", TARGET);
 
@@ -26,14 +27,15 @@ public class Test {
         HTML.append("<h4 style='margin:0px;'>评估子标题</h4>");
         HTML.append("<img style='display:block;width:100%;' src=\"img/1.png\">");//style='display:block;margin-bottom:5px;'
 
-        new Test().createPdf(BASEURI, HTML.toString(), DEST);
+//        new Test().createPdf(BASEURI, HTML.toString(), DEST);
+        new Test().createPdf(BASEURI, SRC, DEST);
         System.out.println("ok");
     }
 
     /**
      * Creates the PDF file.
      */
-    public void createPdf(String baseUri, String html, String dest) throws IOException {
+    public void createPdf(String baseUri, String src, String dest) throws IOException {
         // 设置字体（得在资源文件resources/fonts中加入字体文件，微软雅黑、宋体等）
         String fonts = this.getClass().getResource("/fonts").getPath();
         System.out.println(fonts);
@@ -45,6 +47,7 @@ public class Test {
         properties.setFontProvider(fontProvider);
         properties.setCharset("UTF-8");
         PdfWriter pdfWriter = new PdfWriter(dest, new WriterProperties().setFullCompressionMode(false));
-        HtmlConverter.convertToPdf(html, pdfWriter, properties);
+//        HtmlConverter.convertToPdf(src, pdfWriter, properties);
+        HtmlConverter.convertToPdf(new FileInputStream(src), pdfWriter, properties);
     }
 }
