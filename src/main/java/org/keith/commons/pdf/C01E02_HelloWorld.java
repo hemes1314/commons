@@ -11,7 +11,7 @@ import com.itextpdf.html2pdf.HtmlConverter;
 public class C01E02_HelloWorld {
 
     public static final String BASEURI = "src/main/resources/html/";
-    public static final String HTML = "<h1>Test</h1><p>Hello World</p><img src=\"img/1.jpg\">";
+    public static final String HTML = "<h1>Test</h1><p>Hello World</p><img src=\"img/1.png\">";
     public static final String TARGET = "target/results/ch01/";
     public static final String DEST = String.format("%stest-02.pdf", TARGET);
 

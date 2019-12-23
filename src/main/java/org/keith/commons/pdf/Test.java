@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class Test {
     public static final String BASEURI = "D:/mnt/aps/tmp/fileUpload/file/template/";
-    public static final String SRC = String.format("%sindex.tpl", BASEURI);
+    public static final String SRC = String.format("%stemp.tpl", BASEURI);
     public static final String TARGET = "target/results/ch01/";
     public static final String DEST = String.format("%stest.pdf", TARGET);
 
@@ -25,10 +25,22 @@ public class Test {
         StringBuilder HTML = new StringBuilder();
         HTML.append("<h3 style='margin:0px;'>模型评估：image-classification-GoogleNet</h3>");
         HTML.append("<h4 style='margin:0px;'>评估子标题</h4>");
-        HTML.append("<img style='display:block;width:100%;' src=\"img/1.png\">");//style='display:block;margin-bottom:5px;'
-
-//        new Test().createPdf(BASEURI, HTML.toString(), DEST);
-        new Test().createPdf(BASEURI, SRC, DEST);
+//        HTML.append("<img style='display:block;width:100%;' src=\"img/1.png\">");//style='display:block;margin-bottom:5px;'
+        HTML.append("<table style='table-layout: fixed; word-wrap: break-word; word-break: break-all; width: 100%; text-align: center;' border='1' cellspacing='0'>");
+        for(int i = 0; i < 50; i++) {
+            HTML.append("<tr>");
+            HTML.append("<td style='width: 17%;'>");HTML.append("x2 * x3");HTML.append("</td>");
+            HTML.append("<td style='width: 17%;'>");HTML.append("dc_model_repo.step. sklearn_step.SKLearnDCTransformer");HTML.append("</td>");
+            HTML.append("<td style='width: 17%;'>");HTML.append("dc_model_repo.step. sklearn_step.SKLearnDCTransformer");HTML.append("</td>");
+            HTML.append("<td style='width: 17%;'>");HTML.append("dc_model_repo.step. sklearn_step.SKLearnDCTransformer");HTML.append("</td>");
+            HTML.append("<td>");HTML.append("--");HTML.append("</td>");
+            HTML.append("<td>");HTML.append("--");HTML.append("</td>");
+            HTML.append("</tr>");
+        }
+        HTML.append("</table>");
+        System.out.println(HTML.toString());
+        new Test().createPdf(BASEURI, HTML.toString(), DEST);
+//        new Test().createPdf(BASEURI, SRC, DEST);
         System.out.println("ok");
     }
 
@@ -47,7 +59,7 @@ public class Test {
         properties.setFontProvider(fontProvider);
         properties.setCharset("UTF-8");
         PdfWriter pdfWriter = new PdfWriter(dest, new WriterProperties().setFullCompressionMode(false));
-//        HtmlConverter.convertToPdf(src, pdfWriter, properties);
-        HtmlConverter.convertToPdf(new FileInputStream(src), pdfWriter, properties);
+        HtmlConverter.convertToPdf(src, pdfWriter, properties);
+//        HtmlConverter.convertToPdf(new FileInputStream(src), pdfWriter, properties);
     }
 }
