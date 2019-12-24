@@ -1,5 +1,6 @@
 package org.keith.commons.algrorithm.tree;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang.StringUtils;
 
@@ -9,9 +10,9 @@ import java.util.*;
 public class TreeQryByFile {
     public static void main(String[] args) {
 
-        String root = "1";
-        Integer level = 5;
-        File file = new File("d:/file/tree.txt");
+        String root = "0";
+        Integer level = 3;
+        File file = new File("d:/file/tree2.txt");
 
         List<ResultNode> result = null;
         try {
@@ -28,17 +29,17 @@ public class TreeQryByFile {
             put(rootNodeId, new LevelNode(1, null));
         }};
         List<ResultNode> result = new ArrayList<>();
+        Set<String> discardKeys = new HashSet<>();
         // readFile readLine()
         int i = 0;
         String data = null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         data:while (StringUtils.isNotBlank(data = bufferedReader.readLine())) {
-            Iterator<String> iterator = surplusMap.keySet().iterator();
-            while (iterator.hasNext()) {
-                String surplusKey = iterator.next();
+
+            for (String surplusKey : surplusMap.keySet()) {
                 if (surplusMap.get(surplusKey).getLevel() > level) {
-                    iterator.remove();
-                    if (!iterator.hasNext()) {
+                    discardKeys.add(surplusKey);
+                    if (discardKeys.size() == surplusMap.keySet().size()) {
                         return result;
                     }
                     continue;
@@ -82,13 +83,17 @@ public class TreeQryByFile {
     }
 
     private static Node parseNode(String lineStr) {
-        String[] dataArr = lineStr.split("&");
-        String id = dataArr[0];
-        String name = dataArr[1];
-        String left = dataArr[2];
-        String right = dataArr[3];
-        String leftEdge = dataArr[4];
-        String rightEdge = dataArr[5];
+        List<String> dataList = CollectionUtil.toList(lineStr.split("&"));
+        for(int i = 0; i < 6-dataList.size(); i++) {
+            dataList.add("");
+        }
+        String id = dataList.get(0);
+        String name = dataList.get(1);
+        String left = dataList.get(2);
+        String right = dataList.get(3);
+        String leftEdge = dataList.get(4);
+        String rightEdge = dataList.get(5);
+        System.out.println("id:"+id+";"+"name:"+name+";"+"left:"+left+";"+"right:"+right+";"+"leftEdge:"+leftEdge+";"+"rightEdge:"+rightEdge);
         Node node = new Node();
         node.setId(id);
         node.setName(name);
