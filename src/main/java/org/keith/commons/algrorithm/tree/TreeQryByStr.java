@@ -43,16 +43,17 @@ public class TreeQryByStr {
 
         String root = "2";
         Integer level = 5;
-        List<ResultNode> result = getTree(root, level);
+        List<ResultNode> result = new TreeQryByStr().getTree(root, level);
         System.out.println("result.count:"+result.size());
         System.out.println(JSON.toJSONString(result));
     }
 
-    public static List<ResultNode> getTree(String rootNodeId, Integer level) {
+    public List<ResultNode> getTree(String rootNodeId, Integer level) {
         Map<String, LevelNode> surplusMap = new LinkedHashMap(){{
             put(rootNodeId, new LevelNode(1, null));
         }};
         List<ResultNode> result = new ArrayList<>();
+        Set<String> discardKeys = new HashSet<>();
         // readFile readLine()
         datas:
         for(int i = 0; i < datas.size(); i++) {
@@ -61,8 +62,8 @@ public class TreeQryByStr {
             while(iterator.hasNext()) {
                 String surplusKey = iterator.next();
                 if(surplusMap.get(surplusKey).getLevel() > level) {
-                    iterator.remove();
-                    if(!iterator.hasNext()) {
+                    discardKeys.add(surplusKey);
+                    if (discardKeys.size() == surplusMap.keySet().size()) {
                         return result;
                     }
                     continue;
@@ -71,30 +72,41 @@ public class TreeQryByStr {
                     Node currentNode = parseNode(currentData);
                     LevelNode currentLevel = surplusMap.get(surplusKey);
                     // add result
-                    ResultNode resultNode = new ResultNode();
-                    resultNode.setId(currentNode.getId());
-                    resultNode.setName(currentNode.getName());
-                    resultNode.setPid(currentLevel.getParentId());
-                    resultNode.setEdge(currentLevel.getEdge());
-                    result.add(resultNode);
+                    result.add(getResultNode(currentNode, currentLevel));
                     // remove this
                     surplusMap.remove(surplusKey);
-                    // put children
-                    LevelNode leftChild = new LevelNode(currentLevel.getLevel()+1, currentNode.getId());
-                    if(currentLevel.getLevel() < level) {
-                        leftChild.setEdge(currentNode.getLeftEdge());
+                    // set children -> surplusMap
+                    setLevelNode(surplusMap, currentNode, currentLevel, level);
+                    if(surplusMap.keySet().isEmpty()) {
+                        return result;
                     }
-                    LevelNode rightChild = new LevelNode(currentLevel.getLevel()+1, currentNode.getId());
-                    if(currentLevel.getLevel() < level) {
-                        rightChild.setEdge(currentNode.getRightEdge());
-                    }
-                    surplusMap.put(currentNode.getLeftId(), leftChild);
-                    surplusMap.put(currentNode.getRightId(), rightChild);
                     continue datas;
                 }
             }
         }
         return result;
+    }
+
+    private void setLevelNode(Map<String, LevelNode> surplusMap, Node currentNode, LevelNode currentLevel, Integer level) {
+        LevelNode leftChild = new LevelNode(currentLevel.getLevel() + 1, currentNode.getId());
+        if (currentLevel.getLevel() < level) {
+            leftChild.setEdge(currentNode.getLeftEdge());
+        }
+        LevelNode rightChild = new LevelNode(currentLevel.getLevel() + 1, currentNode.getId());
+        if (currentLevel.getLevel() < level) {
+            rightChild.setEdge(currentNode.getRightEdge());
+        }
+        surplusMap.put(currentNode.getLeftId(), leftChild);
+        surplusMap.put(currentNode.getRightId(), rightChild);
+    }
+
+    private ResultNode getResultNode(Node currentNode, LevelNode currentLevel) {
+        ResultNode resultNode = new ResultNode();
+        resultNode.setId(currentNode.getId());
+        resultNode.setName(currentNode.getName());
+        resultNode.setPid(currentLevel.getParentId());
+        resultNode.setEdge(currentLevel.getEdge());
+        return resultNode;
     }
 
     private static Node parseNode(String lineStr) {
@@ -112,6 +124,7 @@ public class TreeQryByStr {
         node.setRightId(right);
         node.setLeftEdge(leftEdge);
         node.setRightEdge(rightEdge);
+        System.out.println(JSON.toJSONString(node));
         return node;
     }
 

@@ -10,8 +10,8 @@ import java.util.*;
 public class TreeQryByFile {
     public static void main(String[] args) {
 
-        String root = "592";
-        Integer level = 4;
+        String root = "0";
+        Integer level = 6;
         File file = new File("d:/file/tree2.txt");
 
         List<ResultNode> result = null;
@@ -25,37 +25,38 @@ public class TreeQryByFile {
     }
 
     public List<ResultNode> getTree(File file, String rootNodeId, Integer level) throws Exception {
-        Map<String, LevelNode> surplusMap = new LinkedHashMap() {{
+        Map<String, LevelNode> surplusMap = new HashMap() {{
             put(rootNodeId, new LevelNode(1, null));
         }};
         List<ResultNode> result = new ArrayList<>();
-        Set<String> discardKeys = new HashSet<>();
+//        Set<String> discardKeys = new HashSet<>();
         // readFile readLine()
         int i = 0;
         String data = null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-        data:while (StringUtils.isNotBlank(data = bufferedReader.readLine())) {
-            if(data.startsWith("595&")) {
-                System.out.println(data);
+        while (StringUtils.isNotBlank(data = bufferedReader.readLine())) {
+            String surplusKey = String.valueOf(i++);
+            LevelNode currentLevel = surplusMap.get(surplusKey);
+            if(currentLevel == null) {
+                continue;
             }
-            for (String surplusKey : surplusMap.keySet()) {
-                if (surplusMap.get(surplusKey).getLevel() > level) {
-                    discardKeys.add(surplusKey);
-                    if (discardKeys.size() == surplusMap.keySet().size()) {
-                        return result;
-                    }
-                    continue;
+            if (currentLevel.getLevel() > level) {
+                surplusMap.remove(surplusKey);
+                if (surplusMap.keySet().isEmpty()) {
+                    return result;
                 }
-                if (data.startsWith(surplusKey + "&")) {
-                    Node currentNode = parseNode(data);
-                    LevelNode currentLevel = surplusMap.get(surplusKey);
-                    // add result
-                    result.add(getResultNode(currentNode, currentLevel));
-                    // remove this
-                    surplusMap.remove(surplusKey);
-                    // set children -> surplusMap
-                    setLevelNode(surplusMap, currentNode, currentLevel, level);
-                    continue data;
+                continue;
+            }
+            if (data.startsWith(surplusKey + "&")) {
+                Node currentNode = parseNode(data);
+                // add result
+                result.add(getResultNode(currentNode, currentLevel));
+                // remove this
+                surplusMap.remove(surplusKey);
+                // set children -> surplusMap
+                setLevelNode(surplusMap, currentNode, currentLevel, level);
+                if (surplusMap.keySet().isEmpty()) {
+                    return result;
                 }
             }
         }
