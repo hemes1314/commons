@@ -10,8 +10,8 @@ import java.util.*;
 public class TreeQryByFile {
     public static void main(String[] args) {
 
-        String root = "0";
-        Integer level = 3;
+        String root = "592";
+        Integer level = 4;
         File file = new File("d:/file/tree2.txt");
 
         List<ResultNode> result = null;
@@ -35,7 +35,9 @@ public class TreeQryByFile {
         String data = null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         data:while (StringUtils.isNotBlank(data = bufferedReader.readLine())) {
-
+            if(data.startsWith("595&")) {
+                System.out.println(data);
+            }
             for (String surplusKey : surplusMap.keySet()) {
                 if (surplusMap.get(surplusKey).getLevel() > level) {
                     discardKeys.add(surplusKey);
@@ -84,7 +86,8 @@ public class TreeQryByFile {
 
     private static Node parseNode(String lineStr) {
         List<String> dataList = CollectionUtil.toList(lineStr.split("&"));
-        for(int i = 0; i < 6-dataList.size(); i++) {
+        int total = 6 - dataList.size();
+        for(int i = 0; i < total; i++) {
             dataList.add("");
         }
         String id = dataList.get(0);
