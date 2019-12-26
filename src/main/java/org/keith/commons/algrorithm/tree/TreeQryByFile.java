@@ -11,10 +11,10 @@ public class TreeQryByFile {
     public static void main(String[] args) {
 
         String root = "0";
-        Integer level = 6;
-        File file = new File("d:/file/tree2.txt");
+        Integer level = 10;
+        File file = new File("d:/file/tree_1.txt");
 
-        List<ResultNode> result = null;
+        List<ArrayList<String>> result = null;
         try {
             result = new TreeQryByFile().getTree(file, root, level);
         } catch (Exception e) {
@@ -24,11 +24,11 @@ public class TreeQryByFile {
         System.out.println(JSON.toJSONString(result));
     }
 
-    public List<ResultNode> getTree(File file, String rootNodeId, Integer level) throws Exception {
+    public List<ArrayList<String>> getTree(File file, String rootNodeId, Integer level) throws Exception {
         Map<String, LevelNode> surplusMap = new HashMap() {{
             put(rootNodeId, new LevelNode(1, null));
         }};
-        List<ResultNode> result = new ArrayList<>();
+        List<ArrayList<String>> result = new ArrayList<>();
 //        Set<String> discardKeys = new HashSet<>();
         // readFile readLine()
         int i = 0;
@@ -76,13 +76,18 @@ public class TreeQryByFile {
         surplusMap.put(currentNode.getRightId(), rightChild);
     }
 
-    private ResultNode getResultNode(Node currentNode, LevelNode currentLevel) {
-        ResultNode resultNode = new ResultNode();
-        resultNode.setId(currentNode.getId());
-        resultNode.setName(currentNode.getName());
-        resultNode.setPid(currentLevel.getParentId());
-        resultNode.setEdge(currentLevel.getEdge());
-        return resultNode;
+    private ArrayList<String> getResultNode(Node currentNode, LevelNode currentLevel) {
+//        ResultNode resultNode = new ResultNode();
+//        resultNode.setId(currentNode.getId());
+//        resultNode.setName(currentNode.getName());
+//        resultNode.setPid(currentLevel.getParentId());
+//        resultNode.setEdge(currentLevel.getEdge());
+        ArrayList<String> list = new ArrayList<>();
+        list.add(currentNode.getId());
+        list.add(currentNode.getName());
+        list.add(currentLevel.getParentId());
+        list.add(currentLevel.getEdge());
+        return list;
     }
 
     private static Node parseNode(String lineStr) {
