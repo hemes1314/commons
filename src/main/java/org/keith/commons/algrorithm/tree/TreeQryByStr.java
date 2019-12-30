@@ -53,35 +53,22 @@ public class TreeQryByStr {
             put(rootNodeId, new LevelNode(1, null));
         }};
         List<ResultNode> result = new ArrayList<>();
-        Set<String> discardKeys = new HashSet<>();
-        // readFile readLine()
-        datas:
         for(int i = 0; i < datas.size(); i++) {
             String currentData = datas.get(i);
-            Iterator<String> iterator = surplusMap.keySet().iterator();
-            while(iterator.hasNext()) {
-                String surplusKey = iterator.next();
-                if(surplusMap.get(surplusKey).getLevel() > level) {
-                    discardKeys.add(surplusKey);
-                    if (discardKeys.size() == surplusMap.keySet().size()) {
-                        return result;
-                    }
-                    continue;
-                }
-                if(currentData.startsWith(surplusKey+"&")) {
-                    Node currentNode = parseNode(currentData);
-                    LevelNode currentLevel = surplusMap.get(surplusKey);
-                    // add result
-                    result.add(getResultNode(currentNode, currentLevel));
-                    // remove this
-                    surplusMap.remove(surplusKey);
-                    // set children -> surplusMap
-                    setLevelNode(surplusMap, currentNode, currentLevel, level);
-                    if(surplusMap.keySet().isEmpty()) {
-                        return result;
-                    }
-                    continue datas;
-                }
+            Node currentNode = parseNode(currentData);
+            String surplusKey = currentNode.getId();
+            LevelNode currentLevel = surplusMap.get(surplusKey);
+            if(currentLevel == null) {
+                continue;
+            }
+            // add result
+            result.add(getResultNode(currentNode, currentLevel));
+            // remove this
+            surplusMap.remove(surplusKey);
+            // set children -> surplusMap
+            setLevelNode(surplusMap, currentNode, currentLevel, level);
+            if(surplusMap.keySet().isEmpty()) {
+                return result;
             }
         }
         return result;
@@ -91,13 +78,13 @@ public class TreeQryByStr {
         LevelNode leftChild = new LevelNode(currentLevel.getLevel() + 1, currentNode.getId());
         if (currentLevel.getLevel() < level) {
             leftChild.setEdge(currentNode.getLeftEdge());
+            surplusMap.put(currentNode.getLeftId(), leftChild);
         }
         LevelNode rightChild = new LevelNode(currentLevel.getLevel() + 1, currentNode.getId());
         if (currentLevel.getLevel() < level) {
             rightChild.setEdge(currentNode.getRightEdge());
+            surplusMap.put(currentNode.getRightId(), rightChild);
         }
-        surplusMap.put(currentNode.getLeftId(), leftChild);
-        surplusMap.put(currentNode.getRightId(), rightChild);
     }
 
     private ResultNode getResultNode(Node currentNode, LevelNode currentLevel) {

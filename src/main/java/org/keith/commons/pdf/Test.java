@@ -37,7 +37,7 @@ public class Test {
         HTML.append("<h3 style='margin:0px;'>模型评估：image-classification-GoogleNet</h3>");
         HTML.append("<h4 style='margin:0px;'>评估子标题</h4>");
 //        HTML.append("<img style='display:block;width:100%;' src=\"d:/file/1.png\"/>");//style='display:block;margin-bottom:5px;'
-        HTML.append("<table style='table-layout: fixed; word-break: break-all; word-break:break-strict; width: 100%; text-align: center;' border='1' cellspacing='0'>");
+        HTML.append("<table style='table-layout: fixed; word-break: break-all; word-break:break-strict; width: 100%; text-align: center;' border='1' cellspacing='0' cellpadding='2'>");
         for(int i = 0; i < 50; i++) {
             HTML.append("<tr>");
             HTML.append("<td style='width: 17%;'>");HTML.append("x2 * x3");HTML.append("</td>");

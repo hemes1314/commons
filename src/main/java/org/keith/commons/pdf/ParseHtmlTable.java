@@ -35,32 +35,21 @@ public class ParseHtmlTable {
     public static final String pdfDestPath = "target/results/ch01/";
     public static final String htmlPath = "D:/file/1.htm";
 
-    public static void main(String[] args) throws IOException, DocumentException {
+    public static void main(String[] args) throws IOException {
         String pdfName = "test-02.pdf";
         ParseHtmlTable parseHtmlTable = new ParseHtmlTable();
         String htmlStr = FileUtils.readFileToString(new File(htmlPath));
-        parseHtmlTable.html2pdf(htmlStr,pdfName ,"C:\\Windows\\Fonts");
+        parseHtmlTable.html2pdf(htmlStr,pdfName ,"/fonts/simsun.ttf");
     }
 
 
-    public void html2pdf(String html, String pdfName, String fontDir) {
+    public void html2pdf(String html, String pdfName, String fontPath) {
         try {
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             ITextRenderer renderer = new ITextRenderer();
             ITextFontResolver fontResolver = (ITextFontResolver) renderer.getSharedContext().getFontResolver();
             //添加字体库 begin
-            File f = new File(fontDir);
-            if (f.isDirectory()) {
-                File[] files = f.listFiles(new FilenameFilter() {
-                    public boolean accept(File dir, String name) {
-                        String lower = name.toLowerCase();
-                        return lower.endsWith(".otf") || lower.endsWith(".ttf") || lower.endsWith(".ttc");
-                    }
-                });
-                for (int i = 0; i < files.length; i++) {
-                    fontResolver.addFont(files[i].getAbsolutePath(), BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-                }
-            }
+            fontResolver.addFont(fontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
             //添加字体库end
             renderer.setDocumentFromString(html);
             renderer.layout();

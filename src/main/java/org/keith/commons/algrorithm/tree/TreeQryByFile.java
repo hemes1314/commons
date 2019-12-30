@@ -11,7 +11,7 @@ public class TreeQryByFile {
     public static void main(String[] args) {
 
         String root = "0";
-        Integer level = 10;
+        Integer level = 4;
         File file = new File("d:/file/tree_1.txt");
 
         List<ArrayList<String>> result = null;
@@ -29,26 +29,16 @@ public class TreeQryByFile {
             put(rootNodeId, new LevelNode(1, null));
         }};
         List<ArrayList<String>> result = new ArrayList<>();
-//        Set<String> discardKeys = new HashSet<>();
-        // readFile readLine()
-        int i = 0;
         String data = null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         while (StringUtils.isNotBlank(data = bufferedReader.readLine())) {
-            String surplusKey = String.valueOf(i++);
+            Node currentNode = parseNode(data);
+            String surplusKey = currentNode.getId();
             LevelNode currentLevel = surplusMap.get(surplusKey);
             if(currentLevel == null) {
                 continue;
             }
-            if (currentLevel.getLevel() > level) {
-                surplusMap.remove(surplusKey);
-                if (surplusMap.keySet().isEmpty()) {
-                    return result;
-                }
-                continue;
-            }
             if (data.startsWith(surplusKey + "&")) {
-                Node currentNode = parseNode(data);
                 // add result
                 result.add(getResultNode(currentNode, currentLevel));
                 // remove this
@@ -67,13 +57,13 @@ public class TreeQryByFile {
         LevelNode leftChild = new LevelNode(currentLevel.getLevel() + 1, currentNode.getId());
         if (currentLevel.getLevel() < level) {
             leftChild.setEdge(currentNode.getLeftEdge());
+            surplusMap.put(currentNode.getLeftId(), leftChild);
         }
         LevelNode rightChild = new LevelNode(currentLevel.getLevel() + 1, currentNode.getId());
         if (currentLevel.getLevel() < level) {
             rightChild.setEdge(currentNode.getRightEdge());
+            surplusMap.put(currentNode.getRightId(), rightChild);
         }
-        surplusMap.put(currentNode.getLeftId(), leftChild);
-        surplusMap.put(currentNode.getRightId(), rightChild);
     }
 
     private ArrayList<String> getResultNode(Node currentNode, LevelNode currentLevel) {
@@ -112,23 +102,4 @@ public class TreeQryByFile {
         node.setRightEdge(rightEdge);
         return node;
     }
-
-    /*
-     try {
-            BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-
-            int i=0;
-            while((str = bufferedReader.readLine()) != null)
-            {
-                if(i++==rowIndex){
-                    break;
-                }
-                //System.out.println(str);
-            }
-
-            bufferedReader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-     */
 }
